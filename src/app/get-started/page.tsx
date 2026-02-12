@@ -47,9 +47,13 @@ export default function GetStarted() {
     setStep(2)
   }
 
+  function getSnippetUrl() {
+    const origin = typeof window !== 'undefined' ? window.location.origin : 'https://agentgate.dev'
+    return `<script src="${origin}/s/${snippetId}.js" defer></script>`
+  }
+
   function copySnippet() {
-    const snippet = `<script src="https://agentgate.dev/s/${snippetId}.js" defer></script>`
-    navigator.clipboard.writeText(snippet)
+    navigator.clipboard.writeText(getSnippetUrl())
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -182,7 +186,7 @@ export default function GetStarted() {
                   </button>
                 </div>
                 <pre className="text-[14px] font-mono leading-relaxed text-system-green overflow-x-auto">
-                  {`<script src="https://agentgate.dev/s/${snippetId}.js" defer></script>`}
+                  {getSnippetUrl()}
                 </pre>
               </div>
 
