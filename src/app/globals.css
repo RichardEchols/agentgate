@@ -47,3 +47,44 @@ body {
   0%, 100% { box-shadow: 0 0 20px rgba(10, 132, 255, 0.2); }
   50% { box-shadow: 0 0 40px rgba(10, 132, 255, 0.4); }
 }
+
+.blog-content h2,
+.blog-content h3 {
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+}
+
+.blog-content h2 {
+  margin: 2rem 0 0.75rem;
+  font-size: 1.6rem;
+}
+
+.blog-content h3 {
+  margin: 1.5rem 0 0.6rem;
+  font-size: 1.2rem;
+}
+
+.blog-content p {
+  margin: 0.95rem 0;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.8;
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin: 0.75rem 0 1rem 1.2rem;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.blog-content li {
+  margin: 0.45rem 0;
+}
+
+.blog-content a {
+  color: var(--color-accent-hover);
+  text-underline-offset: 3px;
+}
+
+.blog-content strong {
+  color: #fff;
+}
