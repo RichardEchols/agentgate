@@ -123,7 +123,7 @@ export function Hero() {
                   <span className="text-system-pink">&lt;script </span>
                   <span className="text-system-orange">src</span>
                   <span className="text-text-tertiary">=</span>
-                  <span className="text-system-green">&quot;https://agentgate.dev/s/YOUR_ID.js&quot;</span>
+                  <span className="text-system-green">&quot;https://getagentgate.com/s/YOUR_ID.js&quot;</span>
                   <span className="text-system-pink">&gt;&lt;/script&gt;</span>
                 </code>
               </pre>
