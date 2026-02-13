@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-V7J2YJFE05";
 
 export const metadata: Metadata = {
   title: "AgentGate — Make Your Website AI-Agent Ready",
@@ -39,7 +44,23 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+        <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
+        {children}
+      </body>
     </html>
   );
 }
