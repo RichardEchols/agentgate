@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00DC82"/>
+      <stop offset="100%" stop-color="#00B4D8"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00DC82"/>
+      <stop offset="50%" stop-color="#00B4D8"/>
+      <stop offset="100%" stop-color="#7B61FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#0A0A0F"/>
+  <!-- Gate/portal arch -->
+  <path d="M156 400 L156 200 Q156 120 256 120 Q356 120 356 200 L356 400" stroke="url(#g2)" stroke-width="36" fill="none" stroke-linecap="round"/>
+  <!-- Center beam / signal lines -->
+  <line x1="256" y1="180" x2="256" y2="340" stroke="url(#g)" stroke-width="24" stroke-linecap="round" opacity="0.9"/>
+  <!-- Signal dots -->
+  <circle cx="256" cy="220" r="12" fill="#00DC82" opacity="0.6"/>
+  <circle cx="256" cy="270" r="10" fill="#00DC82" opacity="0.4"/>
+  <circle cx="256" cy="310" r="8" fill="#00DC82" opacity="0.25"/>
+  <!-- Small side arrows indicating flow -->
+  <path d="M200 260 L220 280 L200 300" stroke="#00DC82" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+  <path d="M312 260 L292 280 L312 300" stroke="#00DC82" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+</svg>

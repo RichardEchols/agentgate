@@ -8,37 +8,43 @@ const useCases = [
     icon: Scale,
     title: 'Law Firms',
     tool: 'book_consultation',
-    description: 'AI agents book consultations for potential clients 24/7. "Find me a personal injury lawyer in Dallas" → your form, filled and submitted.',
+    prompt: '"Find me a personal injury lawyer in Dallas"',
+    result: 'AI agent fills your contact form with the client\'s details.',
   },
   {
     icon: Scissors,
     title: 'Barbers & Salons',
     tool: 'book_appointment',
-    description: '"Book me a haircut this Saturday" → the AI agent finds your shop, picks an available slot, fills the booking form.',
+    prompt: '"Book me a haircut this Saturday"',
+    result: 'AI agent finds your shop, picks a slot, and books it.',
   },
   {
     icon: Wrench,
     title: 'Contractors',
     tool: 'request_quote',
-    description: '"I need a bathroom renovation quote" → AI agent fills out your quote request with the homeowner\'s details automatically.',
+    prompt: '"I need a bathroom renovation quote"',
+    result: 'AI agent fills your quote form with homeowner details.',
   },
   {
     icon: ShoppingCart,
     title: 'E-Commerce',
     tool: 'search_products',
-    description: '"Find me a blue leather wallet under $50" → AI agent searches your inventory, compares options, adds to cart.',
+    prompt: '"Find me a blue leather wallet under $50"',
+    result: 'AI agent searches inventory, compares, and adds to cart.',
   },
   {
     icon: Stethoscope,
     title: 'Healthcare',
     tool: 'schedule_visit',
-    description: '"Schedule a dentist appointment next Tuesday" → AI agent checks availability and books directly through your site.',
+    prompt: '"Schedule a dentist appointment next Tuesday"',
+    result: 'AI agent checks availability and books directly.',
   },
   {
     icon: GraduationCap,
     title: 'Education',
     tool: 'enroll_course',
-    description: '"Sign me up for the Python bootcamp starting in March" → AI agent handles enrollment forms seamlessly.',
+    prompt: '"Sign me up for the Python bootcamp"',
+    result: 'AI agent handles enrollment forms seamlessly.',
   },
 ]
 
@@ -50,16 +56,19 @@ export function UseCases() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-[34px] font-bold tracking-tight mb-4">Every Industry. Every Website.</h2>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
-            If your website has a form, AgentGate makes it work with AI agents. Here&apos;s what that looks like.
+          <span className="text-[12px] font-semibold text-system-teal uppercase tracking-[0.2em] mb-4 block">Use Cases</span>
+          <h2 className="text-[36px] md:text-[42px] font-extrabold tracking-[-0.02em] mb-4">
+            Every Industry. Every Website.
+          </h2>
+          <p className="text-lg text-text-secondary max-w-xl mx-auto">
+            If your website has a form, AgentGate makes it work with AI agents.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {useCases.map((useCase, i) => (
             <motion.div
               key={useCase.title}
@@ -67,18 +76,21 @@ export function UseCases() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-bg-secondary border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all duration-300"
+              className="bg-bg-secondary border border-border rounded-xl p-6 hover:border-accent/15 transition-all duration-400 group"
             >
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                  <useCase.icon className="w-5 h-5 text-text-secondary" />
+                <div className="w-10 h-10 rounded-lg bg-bg-tertiary flex items-center justify-center">
+                  <useCase.icon className="w-5 h-5 text-text-tertiary group-hover:text-accent transition-colors duration-300" />
                 </div>
                 <div>
-                  <h3 className="text-[17px] font-semibold">{useCase.title}</h3>
-                  <span className="text-[12px] font-mono text-accent">{useCase.tool}()</span>
+                  <h3 className="text-[16px] font-bold leading-tight">{useCase.title}</h3>
+                  <span className="text-[11px] font-mono text-accent/70">{useCase.tool}()</span>
                 </div>
               </div>
-              <p className="text-[15px] text-text-secondary leading-relaxed">{useCase.description}</p>
+              <div className="bg-bg-tertiary/50 rounded-lg px-3 py-2 mb-3">
+                <p className="text-[13px] text-text-secondary italic font-mono leading-snug">{useCase.prompt}</p>
+              </div>
+              <p className="text-[13px] text-text-tertiary leading-relaxed">{useCase.result}</p>
             </motion.div>
           ))}
         </div>

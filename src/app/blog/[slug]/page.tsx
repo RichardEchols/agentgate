@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation'
 import { getPublishedPosts, getPostBySlug } from '@/lib/blog-posts'
 import { BlogPostContent } from './BlogPostContent'
 
+// Allow dynamic rendering for slugs not in generateStaticParams
+export const dynamicParams = true
+
 interface Props {
   params: Promise<{ slug: string }>
 }

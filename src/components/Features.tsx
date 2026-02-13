@@ -39,22 +39,25 @@ const features = [
 export function Features() {
   return (
     <section id="features" className="py-24 md:py-32 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(191,90,242,0.05)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(123,97,255,0.04)_0%,transparent_60%)]" />
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-[34px] font-bold tracking-tight mb-4">Built for the AI Era</h2>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+          <span className="text-[12px] font-semibold text-secondary uppercase tracking-[0.2em] mb-4 block">Features</span>
+          <h2 className="text-[36px] md:text-[42px] font-extrabold tracking-[-0.02em] mb-4">
+            Built for the <span className="text-gradient">AI Era</span>
+          </h2>
+          <p className="text-lg text-text-secondary max-w-xl mx-auto">
             Everything you need to make your website the first stop for AI agents looking for businesses like yours.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((feature, i) => (
             <motion.div
               key={feature.title}
@@ -62,13 +65,13 @@ export function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-bg-secondary border border-white/10 rounded-2xl p-6 hover:bg-bg-tertiary hover:border-white/20 transition-all duration-300 group"
+              className="bg-bg-secondary border border-border rounded-xl p-6 hover:border-accent/15 transition-all duration-400 group"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:bg-accent/10 transition-colors duration-300">
-                <feature.icon className="w-6 h-6 text-text-secondary group-hover:text-accent transition-colors duration-300" />
+              <div className="w-10 h-10 rounded-lg bg-bg-tertiary flex items-center justify-center mb-4 group-hover:bg-accent/10 transition-colors duration-300">
+                <feature.icon className="w-5 h-5 text-text-tertiary group-hover:text-accent transition-colors duration-300" />
               </div>
-              <h3 className="text-[17px] font-semibold mb-2">{feature.title}</h3>
-              <p className="text-[15px] text-text-secondary leading-relaxed">{feature.description}</p>
+              <h3 className="text-[16px] font-bold mb-2">{feature.title}</h3>
+              <p className="text-[14px] text-text-secondary leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>

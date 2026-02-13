@@ -4,12 +4,27 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "AgentGate — Make Your Website AI-Agent Ready",
   description: "The platform that turns any website into an AI-agent-compatible tool. One script tag. Instant WebMCP compliance. Get discovered by AI agents.",
-  keywords: ["WebMCP", "AI agents", "web standard", "AI-ready websites", "agent tools"],
+  keywords: ["WebMCP", "AI agents", "web standard", "AI-ready websites", "agent tools", "AgentGate"],
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "32x32" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "AgentGate — Make Your Website AI-Agent Ready",
     description: "One script tag turns your website into a tool that AI agents can use. Be discovered. Be automated. Be first.",
     type: "website",
+    url: "https://getagentgate.com",
+    siteName: "AgentGate",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "AgentGate — Make Your Website AI-Agent Ready",
+    description: "One script tag turns your website into a tool that AI agents can use.",
+  },
+  metadataBase: new URL("https://getagentgate.com"),
 };
 
 export default function RootLayout({
@@ -19,6 +34,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+      </head>
       <body>{children}</body>
     </html>
   );
