@@ -4,6 +4,7 @@ import { HowItWorks } from '@/components/HowItWorks'
 import { Features } from '@/components/Features'
 import { UseCases } from '@/components/UseCases'
 import { Pricing } from '@/components/Pricing'
+import { BlogPreview } from '@/components/BlogPreview'
 import { Footer } from '@/components/Footer'
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <UseCases />
         <Features />
         <Pricing />
+        <BlogPreview />
         <Footer />
       </div>
     </main>
