@@ -12,6 +12,168 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: '5-signs-your-website-is-invisible-to-ai-agents',
+    title: '5 Signs Your Business Website Is Invisible to AI Agents',
+    description:
+      'AI agents are searching for businesses and filling out forms on behalf of users. Here are 5 red flags that mean your website is invisible to this growing traffic source.',
+    content: `<p>Your website might be getting traffic from Google, ranking for your target keywords, and converting visitors into customers. But there is a new visitor type you probably are not tracking: AI agents.</p>
+<p>In 2026, a growing portion of web traffic is not human users clicking links. It is AI assistants researching on behalf of users, comparing vendors, extracting information, and even completing forms. If your site is not built for this traffic, you are invisible to it.</p>
+<p>Here are 5 signs your business website is invisible to AI agents, and what to do about it.</p>
+
+<h2>Sign 1: Your Forms Have Vague or Generic Field Labels</h2>
+<p>AI agents rely on clear, semantic field labels to understand what information you need. If your contact form has fields labeled "Field 1" or "Info" or "Details," agents cannot reliably fill them out.</p>
+
+<h3>What agents need to see:</h3>
+<ul>
+<li>Explicit labels: "Business Name," "Preferred Contact Method," "Service Interest"</li>
+<li>Clear data types: email fields marked as <code>type="email"</code>, phone as <code>type="tel"</code></li>
+<li>Required field indicators that are machine-readable (not just visual asterisks)</li>
+</ul>
+
+<h3>Why this matters:</h3>
+<p>When a user asks their AI assistant to "request a quote from 3 local contractors," the agent needs to understand what information each contractor requires. Vague labels mean the agent either skips your site or submits incomplete information.</p>
+
+<h3>How to fix it:</h3>
+<ul>
+<li>Audit every form field for clarity</li>
+<li>Use semantic HTML5 input types</li>
+<li>Add <code>aria-label</code> attributes where visual labels are not enough</li>
+<li>Make required fields programmatically detectable with <code>required</code> attributes</li>
+</ul>
+
+<h2>Sign 2: Your Forms Fail Silently or Return Unclear Errors</h2>
+<p>Humans can interpret vague error messages. Agents cannot. If your form submission fails and the error is "Something went wrong" or a redirect to a blank page, the agent has no way to correct the issue or report back to the user.</p>
+
+<h3>What agents need:</h3>
+<ul>
+<li>Explicit success/failure states (HTTP status codes, clear success messages)</li>
+<li>Specific error messages: "Email field is required" not "Please check your input"</li>
+<li>Validation feedback tied to specific fields</li>
+</ul>
+
+<h3>Why this matters:</h3>
+<p>If an agent cannot tell whether a submission succeeded, it may retry repeatedly (creating duplicate leads) or assume failure and move on to your competitor.</p>
+
+<h3>How to fix it:</h3>
+<ul>
+<li>Return clear HTTP response codes (200 for success, 400 for validation errors, 500 for server issues)</li>
+<li>Provide structured error responses with field-level details</li>
+<li>Show explicit success confirmations (not just a redirect)</li>
+</ul>
+
+<h2>Sign 3: Your Key Actions Are Not Discoverable</h2>
+<p>AI agents do not browse your site the same way humans do. They need a way to understand what actions your site supports <em>without</em> clicking through every page.</p>
+
+<h3>What agents need:</h3>
+<p>A machine-readable description of your site capabilities. This might be:</p>
+<ul>
+<li>A capabilities manifest (like WebMCP compatibility)</li>
+<li>Clear schema markup for key actions</li>
+<li>Predictable URL patterns for common tasks</li>
+</ul>
+
+<h3>Why this matters:</h3>
+<p>If an agent lands on your homepage and cannot determine whether you offer appointment booking, quote requests, or product inquiries, it skips you and tries the next result.</p>
+
+<h3>How to fix it:</h3>
+<ul>
+<li>Add structured data (JSON-LD) describing your services and actions</li>
+<li>Implement WebMCP-compatible tool definitions (this is what AgentGate does automatically)</li>
+<li>Make navigation consistent and predictable</li>
+</ul>
+
+<h2>Sign 4: Your Site Relies Heavily on Client-Side JavaScript</h2>
+<p>Many modern websites are built as single-page apps (SPAs) that require complex JavaScript execution to function. While this works fine for human users with browsers, it creates problems for AI agents that may parse HTML without executing JavaScript.</p>
+
+<h3>What agents need:</h3>
+<ul>
+<li>Server-rendered HTML for critical content</li>
+<li>Forms that work without JavaScript (progressive enhancement)</li>
+<li>Stable URL patterns that do not depend on JS routing</li>
+</ul>
+
+<h3>Why this matters:</h3>
+<p>If your contact form only works with React and a user's AI agent is parsing raw HTML, the form is invisible. The agent sees your page but cannot interact with it.</p>
+
+<h3>How to fix it:</h3>
+<ul>
+<li>Ensure forms submit to real endpoints (not just JS event handlers)</li>
+<li>Use server-side rendering (SSR) for critical pages</li>
+<li>Test your site with JavaScript disabled to see what agents see</li>
+</ul>
+
+<h2>Sign 5: You Have No Way to Track Agent Traffic</h2>
+<p>Most analytics platforms track human sessions: clicks, scrolls, time on page. But AI agents do not behave like humans. They do not scroll. They extract information, attempt actions, and leave.</p>
+
+<h3>What you need:</h3>
+<ul>
+<li>Logs that show form submission attempts (successful and failed)</li>
+<li>Error tracking tied to specific fields and validation rules</li>
+<li>User-agent analysis to identify non-human traffic patterns</li>
+</ul>
+
+<h3>Why this matters:</h3>
+<p>If you cannot measure agent traffic, you cannot improve agent compatibility. You might be getting dozens of agent visits per week and not know it.</p>
+
+<h3>How to fix it:</h3>
+<ul>
+<li>Add server-side logging for all form interactions</li>
+<li>Track user-agents that indicate AI usage</li>
+<li>Monitor validation failure rates by field</li>
+<li>Set up alerts for unusual submission patterns</li>
+</ul>
+
+<h2>How AgentGate Solves These Problems</h2>
+<p>AgentGate was built to make any website AI-agent compatible without requiring a rebuild. Here is how it addresses each of these signs:</p>
+
+<h3>Sign 1 (Vague labels):</h3>
+<p>AgentGate detects your forms and generates clear, semantic tool definitions that agents can understand.</p>
+
+<h3>Sign 2 (Silent failures):</h3>
+<p>AgentGate normalizes error responses and provides agents with structured feedback they can act on.</p>
+
+<h3>Sign 3 (Discoverability):</h3>
+<p>AgentGate exposes your site capabilities through WebMCP-compatible tool definitions, making your actions discoverable to any compatible agent.</p>
+
+<h3>Sign 4 (JavaScript dependency):</h3>
+<p>AgentGate provides a compatibility layer that works regardless of your frontend stack, ensuring agents can interact with your forms even if they do not execute JavaScript.</p>
+
+<h3>Sign 5 (No tracking):</h3>
+<p>AgentGate includes analytics (on Pro and Enterprise plans) that show agent traffic, completion rates, and failure points.</p>
+
+<h2>What To Do Next</h2>
+<p>If your website shows 2 or more of these signs, you are likely missing out on AI-mediated traffic. The fix does not require rebuilding your site from scratch.</p>
+
+<h3>Option 1: Manual fixes</h3>
+<p>If you have engineering resources, you can:</p>
+<ul>
+<li>Audit and improve form semantics</li>
+<li>Add structured data and schema markup</li>
+<li>Implement server-side rendering for key pages</li>
+<li>Build custom analytics for agent traffic</li>
+</ul>
+
+<h3>Option 2: Use AgentGate</h3>
+<p>If you want a faster path, AgentGate makes your site AI-agent compatible with one script tag:</p>
+<ul>
+<li>Automatic form detection and tool generation</li>
+<li>WebMCP compatibility out of the box</li>
+<li>Directory listing so agents can find you</li>
+<li>Built-in analytics (Pro and Enterprise)</li>
+</ul>
+
+<p>Get started at <a href="https://getagentgate.com">https://getagentgate.com</a>.</p>
+
+<h2>The Bottom Line</h2>
+<p>AI agents are not a future trend. They are active right now, searching for businesses and completing tasks on behalf of users. If your website is not built for this traffic, you are invisible to it.</p>
+<p>The businesses that make their sites AI-ready now will capture this traffic while their competitors are still trying to figure out what happened to their conversion rates.</p>`.trim(),
+    date: '2026-02-13',
+    readTime: '6 min read',
+    category: 'Website Strategy',
+    tags: ['AI Agents', 'AI Ready Website', 'AI Web Scraping', 'WebMCP'],
+    published: true,
+  },
+  {
     slug: 'why-every-business-needs-an-ai-ready-website-in-2026',
     title: 'Why Every Business Needs an AI-Ready Website in 2026',
     description:
