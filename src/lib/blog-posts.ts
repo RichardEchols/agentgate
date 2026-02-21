@@ -12,6 +12,115 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'agentgate-vs-building-your-own',
+    title: 'AgentGate vs. Building Your Own AI Agent Security Layer: An Honest Comparison',
+    description:
+      'Should you build your own AI agent gateway or use AgentGate? We break down the real engineering cost, maintenance burden, and capability gap of DIY vs. a purpose-built solution.',
+    content: `<p>When your team starts routing real AI agent traffic through your infrastructure, security becomes non-negotiable fast. Agents act at machine speed. A single misconfigured permission can mean hundreds of unintended form submissions, data scrapes, or API calls before a human notices.</p>
+<p>The question most engineering teams hit at this stage is: <strong>do we build our own AI agent security gateway, or use something purpose-built like AgentGate?</strong></p>
+<p>This is an honest comparison. We'll walk through what a DIY implementation actually requires, where it falls short, and where AgentGate adds real value beyond what a custom build can reasonably cover.</p>
+
+<h2>What "AI Agent Security" Actually Means</h2>
+<p>Before comparing approaches, it's worth being precise about what needs to be secured.</p>
+<p>When AI agents interact with your web infrastructure, the attack surface includes:</p>
+<ul>
+<li><strong>Unauthenticated access</strong>: Agents probing endpoints without credentials</li>
+<li><strong>Action flooding</strong>: High-frequency automated actions that overwhelm rate limits</li>
+<li><strong>Intent ambiguity</strong>: Agents executing actions they were not explicitly authorized for by the end user</li>
+<li><strong>Data exfiltration</strong>: Agents reading and transmitting more information than the user intended to share</li>
+<li><strong>Replay attacks</strong>: Malicious actors replaying valid agent sessions with modified payloads</li>
+<li><strong>Scope creep</strong>: Legitimate agents being used for unintended purposes because capabilities aren't properly bounded</li>
+</ul>
+<p>A proper AI agent security layer addresses all of these. Most DIY implementations address two or three, leave the others unhandled, and discover the gaps under pressure.</p>
+
+<h2>The DIY Path: What You're Actually Building</h2>
+<p>If you want to build a production-grade AI agent security layer from scratch, here's what that actually involves:</p>
+
+<h3>1. Capability Schema Definition</h3>
+<p>You need a machine-readable definition of what your site allows agents to do. This means writing and maintaining a schema that describes each action, its required inputs, optional inputs, expected outputs, and authorization requirements.</p>
+<p>For a site with 10 forms and 3 API endpoints, you're looking at a significant initial specification effort — and every time your site changes, the schema needs to update.</p>
+<p><strong>Time estimate</strong>: 2–3 days initial, ongoing maintenance per site change.</p>
+
+<h3>2. Rate Limiting per Agent Identity</h3>
+<p>Standard IP-based rate limiting isn't sufficient for agent traffic. Agents frequently operate from cloud infrastructure with shared IPs. You need rate limiting tied to agent identity tokens, not IP addresses.</p>
+<p>This requires a token issuance system, token validation on every request, per-token rate limit storage (Redis or equivalent), expiration and rotation logic, and abuse detection.</p>
+<p><strong>Time estimate</strong>: 3–5 days to build correctly. Ongoing maintenance as agent providers change token formats.</p>
+
+<h3>3. Intent Verification</h3>
+<p>This is where most DIY attempts skip ahead and pay for it later. Intent verification is the mechanism that confirms a given agent action was actually authorized by the human user — not just technically valid.</p>
+<p>Without intent verification, a legitimate agent with valid credentials can do things the user didn't intend. This is the mechanism that prevents "I asked my assistant to check if this service is available" from turning into "your assistant just booked and paid for the service."</p>
+<p><strong>Time estimate</strong>: 1–2 weeks minimum. Significant ongoing maintenance.</p>
+
+<h3>4. Audit Logging</h3>
+<p>When something goes wrong with agent-driven actions, you need a complete audit trail: who authorized the action, what agent executed it, what inputs were provided, what was returned, and the timestamp.</p>
+<p>This isn't standard application logging. It needs to be structured, queryable, and immutable enough to be useful for incident investigation.</p>
+<p><strong>Time estimate</strong>: 2–3 days to build. Ongoing storage and management costs.</p>
+
+<h3>5. The WebMCP Compatibility Layer</h3>
+<p>The emerging standard for AI agent interoperability is WebMCP. If you want your site to be discoverable by major AI agents, your security layer needs to speak WebMCP — including generating valid capability manifests, handling protocol handshakes, and maintaining compatibility as the standard evolves.</p>
+<p><strong>Time estimate</strong>: 1 week initial. Significant maintenance as the standard matures.</p>
+
+<h2>The DIY Total</h2>
+<table>
+<thead><tr><th>Component</th><th>Initial Build</th><th>Ongoing</th></tr></thead>
+<tbody>
+<tr><td>Capability schema</td><td>2–3 days</td><td>Per site change</td></tr>
+<tr><td>Rate limiting (agent-aware)</td><td>3–5 days</td><td>Monthly maintenance</td></tr>
+<tr><td>Intent verification</td><td>1–2 weeks</td><td>Quarterly updates</td></tr>
+<tr><td>Audit logging</td><td>2–3 days</td><td>Storage costs</td></tr>
+<tr><td>WebMCP compatibility</td><td>1 week</td><td>Ongoing</td></tr>
+<tr><td><strong>Total</strong></td><td><strong>~4–5 weeks</strong></td><td><strong>Ongoing engineering time</strong></td></tr>
+</tbody>
+</table>
+<p>This doesn't include testing across different agent frameworks, documentation, incident response, or security review of the implementation itself.</p>
+
+<h2>What AgentGate Provides Instead</h2>
+
+<h3>Capability Schema — Automatic</h3>
+<p>AgentGate detects your forms and interactive elements on install. You don't write a schema; the system generates one from your actual site structure. When your site changes, the schema updates automatically.</p>
+
+<h3>Rate Limiting — Built-In, Agent-Aware</h3>
+<p>AgentGate implements per-agent-identity rate limiting out of the box. You configure thresholds; the infrastructure handles enforcement, storage, and anomaly detection. No Redis to maintain, no custom middleware.</p>
+
+<h3>Intent Verification — Protocol-Level</h3>
+<p>Because AgentGate sits at the protocol layer, intent verification is part of the standard flow. Every agent action carries a verifiable authorization chain. You don't build this — it's included.</p>
+
+<h3>Audit Logging — Queryable Dashboard</h3>
+<p>Every agent interaction is logged, structured, and searchable through the AgentGate dashboard. You use the system instead of building it.</p>
+
+<h3>WebMCP Compatibility — Maintained</h3>
+<p>AgentGate stays current with WebMCP as the standard evolves. When major AI providers update their agent frameworks, that compatibility work happens on the AgentGate side, not yours.</p>
+
+<h2>Where DIY Still Makes Sense</h2>
+<p>There are legitimate cases for a custom implementation:</p>
+<ul>
+<li><strong>You have unique authorization requirements</strong> — regulated industries with custom compliance requirements or multi-party authorization chains where standard patterns don't fit</li>
+<li><strong>You're already building agent infrastructure</strong> — if your core product is an AI agent platform, the security layer is part of your core competency</li>
+<li><strong>You need full programmatic schema control</strong> — if your API surface is highly dynamic and must be generated from backend models at runtime</li>
+<li><strong>Your scale justifies the investment</strong> — at very high agent traffic volumes with specific optimization requirements</li>
+</ul>
+
+<h2>The Practical Decision Framework</h2>
+<p>Ask your team these questions:</p>
+<ol>
+<li><strong>How many engineering weeks can you spend on agent security infrastructure this quarter?</strong> If the honest answer is "none" or "one," you need a product.</li>
+<li><strong>Is agent security a core competency or a dependency?</strong> If it's something you need to function but doesn't differentiate your product, build as little of it yourself as possible.</li>
+<li><strong>How quickly does your site change?</strong> The faster your site evolves, the more painful manual schema maintenance becomes. Dynamic schema generation scales better.</li>
+<li><strong>What's your incident response posture?</strong> If agent-related incidents can't wait for business hours, you need either a mature custom system with 24/7 on-call, or a product with reliability guarantees.</li>
+</ol>
+
+<h2>Getting Started</h2>
+<p>AgentGate's free tier covers the core security features: capability schema generation, rate limiting, basic audit logging, and WebMCP compatibility. For most teams evaluating the build-vs-buy question, starting with the free tier and assessing whether it covers your requirements is a lower-risk first step than a multi-week build.</p>
+<p>Pro tier ($29/month) adds advanced rate limiting controls, full audit history, priority support, and the AgentGate directory listing that gets your site discovered by AI agents searching for your category.</p>
+<p>Enterprise ($99/month) covers custom capability schemas, SLA guarantees, dedicated onboarding, and compliance documentation for teams in regulated industries.</p>
+<p>The fastest path to agent-ready infrastructure is not always the path you build yourself.</p>`.trim(),
+    date: '2026-02-20',
+    readTime: '8 min read',
+    category: 'Security',
+    tags: ['AI Agent Security', 'WebMCP', 'Architecture', 'Build vs Buy', 'AgentGate'],
+    published: true,
+  },
+  {
     slug: '5-signs-your-website-is-invisible-to-ai-agents',
     title: '5 Signs Your Business Website Is Invisible to AI Agents',
     description:
